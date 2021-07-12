@@ -62,7 +62,6 @@ export default defineComponent({
     },
 
     stopUpdating() {
-      console.log("stopUpdating");
       // stop updating display time
       if (this.timer !== null) {
         clearInterval(this.timer);
@@ -90,7 +89,6 @@ export default defineComponent({
   font-size: 8rem;
   letter-spacing: -0.5rem;
   color: #999;
-  margin-bottom: 1rem;
 }
 
 .record-timer.state-started,

@@ -7,6 +7,19 @@
       @start="startRecording"
       @stop="stopRecording"
     />
+
+    <div class="play-reset-btns">
+      <play-button :recording="recordedAudio" />
+
+      <button
+        :disabled="!recordedAudio"
+        class="reset-button"
+        type="button"
+        @click="reset"
+      >
+        reset
+      </button>
+    </div>
   </div>
 </template>
 
@@ -15,11 +28,12 @@ import { defineComponent } from "vue";
 import useMediaRecorder from "@/composables/use-media-recorder";
 import RecordButton from "./RecordButton.vue";
 import RecordTimer from "./RecordTimer.vue";
+import PlayButton from "./PlayButton.vue";
 
 export default defineComponent({
   name: "Recorder",
 
-  components: { RecordButton, RecordTimer },
+  components: { RecordButton, RecordTimer, PlayButton },
 
   data() {
     return {
@@ -50,6 +64,12 @@ export default defineComponent({
       this.stopTime = new Date();
       this.stopMediaRecorder();
     },
+
+    reset() {
+      this.startTime = null;
+      this.stopTime = null;
+      this.recordedAudio = null;
+    },
   },
 });
 </script>
@@ -61,5 +81,25 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.recorder > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.play-reset-btns {
+  width: 20rem;
+  display: flex;
+  align-items: stretch;
+}
+
+.play-reset-btns > * {
+  flex: 1;
+}
+
+.reset-button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0;
 }
 </style>
