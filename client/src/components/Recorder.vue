@@ -15,3 +15,13 @@ export default defineComponent({
   components: { RecordButton, RecordTimer },
 });
 </script>
+
+<style scoped>
+.recorder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+</style>
