@@ -1,6 +1,6 @@
 <template>
   <div class="recorder">
-    <record-timer />
+    <record-timer :start-time="startTime" :stop-time="stopTime" />
 
     <record-button
       :is-recording="isRecording"
@@ -21,14 +21,19 @@ export default defineComponent({
   data() {
     return {
       isRecording: false,
+      startTime: null as Date | null,
+      stopTime: null as Date | null,
     };
   },
   methods: {
     startRecording() {
       this.isRecording = true;
+      this.startTime = new Date();
+      this.stopTime = null;
     },
     stopRecording() {
       this.isRecording = false;
+      this.stopTime = new Date();
     },
   },
 });
