@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import useAudioPlayer from "@/composables/use-audio-player";
 
 export default defineComponent({
@@ -19,7 +19,7 @@ export default defineComponent({
 
   props: {
     recording: {
-      type: Blob,
+      type: Blob as PropType<Blob | null>,
       default: null,
     },
   },

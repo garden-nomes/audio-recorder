@@ -1,6 +1,7 @@
 <template>
   <button
     :class="{ isRecording }"
+    :disabled="disabled"
     class="record-button"
     type="button"
     @mousedown="$emit('start')"
@@ -18,6 +19,10 @@ export default defineComponent({
 
   props: {
     isRecording: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },

@@ -4,6 +4,7 @@
 
     <record-button
       :is-recording="isRecording"
+      :disabled="!isReadyToRecord || !!recordedAudio"
       @start="startRecording"
       @stop="stopRecording"
     />
