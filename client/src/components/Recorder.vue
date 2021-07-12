@@ -1,7 +1,12 @@
 <template>
   <div class="recorder">
     <record-timer />
-    <record-button />
+
+    <record-button
+      :is-recording="isRecording"
+      @start="startRecording"
+      @stop="stopRecording"
+    />
   </div>
 </template>
 
@@ -13,6 +18,19 @@ import RecordTimer from "./RecordTimer.vue";
 export default defineComponent({
   name: "Recorder",
   components: { RecordButton, RecordTimer },
+  data() {
+    return {
+      isRecording: false,
+    };
+  },
+  methods: {
+    startRecording() {
+      this.isRecording = true;
+    },
+    stopRecording() {
+      this.isRecording = false;
+    },
+  },
 });
 </script>
 
