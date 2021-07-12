@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import useMediaRecorder from "@/composables/use-media-recorder";
 import RecordButton from "./RecordButton.vue";
 import RecordTimer from "./RecordTimer.vue";
 
@@ -30,50 +31,24 @@ export default defineComponent({
     };
   },
 
-  async mounted() {
-    // create a media recorder (will prompt the user for permissions)
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-          video: false,
-        });
-
-        this.recorder = new MediaRecorder(stream);
-        this.recorder.ondataavailable = (event) => this.chunks.push(event.data);
-        this.recorder.onstop = this.onRecordingStopped;
-      } catch (err) {
-        console.error(
-          `unable to create media recorder:\n\n${err.stack || err}`
-        );
-      }
-    } else {
-      console.error("sorry, media recording isn't supported on this browser");
-    }
+  setup() {
+    return useMediaRecorder();
   },
 
   methods: {
     startRecording() {
-      if (this.recorder !== null) {
+      if (this.isReadyToRecord) {
         this.isRecording = true;
         this.startTime = new Date();
         this.stopTime = null;
-        this.recorder.start();
+        this.startMediaRecorder();
       }
     },
 
     stopRecording() {
-      if (this.recorder !== null) {
-        this.isRecording = false;
-        this.stopTime = new Date();
-
-        this.recorder.stop();
-      }
-    },
-
-    onRecordingStopped() {
-      console.log(this.chunks.length);
-      this.chunks = [];
+      this.isRecording = false;
+      this.stopTime = new Date();
+      this.stopMediaRecorder();
     },
   },
 });
