@@ -9,11 +9,20 @@
       @stop="stopRecording"
     />
 
+    <p v-if="isUploadError" class="status-text error">
+      Unable to save recording
+    </p>
+    <p v-else-if="isUploading" class="status-text">Saving recording...</p>
+    <p v-else-if="uploadFilename" class="status-text success">
+      Recording saved as {{ uploadFilename }}
+    </p>
+    <p v-else class="status-text" aria-hidden="true">&nbsp;</p>
+
     <div class="play-reset-btns">
       <play-button :recording="recordedAudio" />
 
       <button
-        :disabled="!recordedAudio"
+        :disabled="!recordedAudio || isUploading"
         class="reset-button"
         type="button"
         @click="reset"
@@ -27,6 +36,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import useMediaRecorder from "@/composables/use-media-recorder";
+import useAudioUploader from "@/composables/use-audio-uploader";
 import RecordButton from "./RecordButton.vue";
 import RecordTimer from "./RecordTimer.vue";
 import PlayButton from "./PlayButton.vue";
@@ -41,13 +51,14 @@ export default defineComponent({
       isRecording: false,
       startTime: null as Date | null,
       stopTime: null as Date | null,
-      chunks: [] as Blob[],
-      recorder: null as MediaRecorder | null,
     };
   },
 
   setup() {
-    return useMediaRecorder();
+    return {
+      ...useMediaRecorder(),
+      ...useAudioUploader(),
+    };
   },
 
   methods: {
@@ -69,7 +80,17 @@ export default defineComponent({
     reset() {
       this.startTime = null;
       this.stopTime = null;
-      this.recordedAudio = null;
+      this.resetMediaRecorder();
+      this.resetUploadStatus();
+    },
+  },
+
+  watch: {
+    // auto upload recording whenever `recordedAudio` changes to something other than null
+    recordedAudio() {
+      if (this.recordedAudio !== null) {
+        this.uploadAudio(this.recordedAudio);
+      }
     },
   },
 });
@@ -102,5 +123,12 @@ export default defineComponent({
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left-width: 0;
+}
+
+.status-text {
+  margin-top: 0;
+  margin-bottom: 2rem !important;
+  font-size: 0.75rem;
+  color: #555;
 }
 </style>

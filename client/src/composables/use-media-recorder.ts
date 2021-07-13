@@ -45,10 +45,16 @@ export default function useMediaRecorder() {
     }
   };
 
+  const resetMediaRecorder = () => {
+    stopMediaRecorder();
+    recordedAudio.value = null;
+  };
+
   return {
     isReadyToRecord, // whether the media recorder is ready
     recordedAudio, // the recorded audio from the last pair of start/stop method calls
     startMediaRecorder, // starts the media recorder
     stopMediaRecorder, // stops the media recorder
+    resetMediaRecorder,
   };
 }
