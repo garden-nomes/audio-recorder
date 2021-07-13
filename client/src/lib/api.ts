@@ -16,7 +16,7 @@ export default class Api {
   // posts a blob to the API with the approriate "Content-Type"
   async postBlob(blob: Blob): Promise<ApiPostResponse> {
     // add artificial delay to demo request state
-    if (process.env.VUE_APP_SIMULATE_DELAY) {
+    if (process.env.VUE_APP_SIMULATE_DELAY === "true") {
       await new Promise((resolve) => setTimeout(resolve, 500));
     }
 
