@@ -1,10 +1,10 @@
 import Api from "@/lib/api";
-import { ref } from "vue";
+import { inject, ref } from "vue";
 
 // Vue composable that tracks the request state for the "postBlob" api call
 export default function useAudioUploader() {
-  // TODO: should grab this from project configuration
-  const api = new Api("http://localhost:3000");
+  // retrieve global API instance using provide/inject
+  const api = inject("api") as Api;
 
   // request state flags
   const isUploading = ref(false);
