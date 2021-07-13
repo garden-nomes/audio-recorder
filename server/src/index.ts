@@ -35,7 +35,7 @@ app.post('/', async (req, res) => {
 
     const basename = path.basename(filename); // don't print out the entire absolute path
     console.log(`audio received, saved to "${basename}"`);
-    res.status(200).send(basename);
+    res.status(200).send({ basename, filename });
 });
 
 // start server
