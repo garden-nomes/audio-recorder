@@ -34,12 +34,12 @@ export default defineComponent({
 
 <style>
 .record-button {
+  transition: transform 100ms ease, box-shadow 100ms ease;
+  transform: translateY(0px);
   font-size: 1.5rem;
   padding: 1.5rem 3rem;
-  width: 20rem;
+  width: 24rem;
   border-radius: 10rem;
-  transition: 150ms background, 150ms color, 150ms border-color,
-    150ms box-shadow ease;
 }
 
 .record-button:not(:disabled) {
@@ -47,16 +47,19 @@ export default defineComponent({
   border-color: #7b0d1e;
 }
 
-.record-button:hover:not(:disabled) {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(159, 32, 66, 0.3);
+.record-button:not(:disabled):hover:not(:active) {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  background: none;
   border-color: #9f2042;
   color: #9f2042;
-  background: none;
 }
 
-.record-button.isRecording:not(:disabled) {
+.record-button:not(:disabled):active {
+  transition: none;
   background: #7b0d1e;
   border-color: #7b0d1e;
   color: #fff;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 </style>

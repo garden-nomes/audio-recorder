@@ -7,8 +7,8 @@
 body {
   /* font stack from https://css-tricks.com/snippets/css/font-stacks/ */
   font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans",
-    "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref",
-    sans-serif;
+    "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana,
+    "Verdana Ref", sans-serif;
   font-size: 24px;
 }
 
@@ -24,13 +24,12 @@ button {
   }
 
   /* custom styling */
-  border: 2px solid #555;
+  border: 2px solid #777;
   font-size: 1rem;
   padding: 0.75rem 1.5rem;
-  color: #555;
+  color: #777;
   border-radius: 6px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  transition: 150ms background, 150ms color, 150ms border-color, 150ms box-shadow ease;
   display: block;
 }
 
@@ -41,8 +40,7 @@ button:disabled {
 }
 
 button:hover:not(:disabled) {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 0, 0, 0.5);
-  background: #555;
-  border-color: #555;
+  background: #777;
+  border-color: #777;
   color: #fff;
 }
