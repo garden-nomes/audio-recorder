@@ -9,18 +9,6 @@
       @stop="stopRecording"
     />
 
-    <p v-if="isUploadError" class="status-text error">
-      Unable to save recording
-    </p>
-    <p v-else-if="isUploading" class="status-text">Saving recording...</p>
-    <p v-else-if="uploadFilename" class="status-text success">
-      Recording saved to
-      <span :title="uploadPath || ''" class="filename">
-        {{ uploadFilename }}
-      </span>
-    </p>
-    <p v-else class="status-text" aria-hidden="true">&nbsp;</p>
-
     <div class="play-reset-btns">
       <play-button :recording="recordedAudio" />
 
@@ -33,6 +21,18 @@
         reset
       </button>
     </div>
+
+    <p v-if="isUploadError" class="status-text error">
+      Unable to save recording
+    </p>
+    <p v-else-if="isUploading" class="status-text">Saving recording...</p>
+    <p v-else-if="uploadFilename" class="status-text success">
+      Recording saved to
+      <span :title="uploadPath || ''" class="filename">
+        {{ uploadFilename }}
+      </span>
+    </p>
+    <p v-else class="status-text" aria-hidden="true">&nbsp;</p>
   </div>
 </template>
 
@@ -130,7 +130,6 @@ export default defineComponent({
 
 .status-text {
   margin-top: 0;
-  margin-bottom: 2rem !important;
   font-size: 0.75rem;
   color: #555;
 }

@@ -37,7 +37,7 @@ export default defineComponent({
 
     formattedDisplayTime(): string {
       const seconds = this.displayTime * 0.001;
-      return `${seconds.toFixed(2)}`;
+      return `${seconds.toFixed(2).padStart(5, "0")}`;
     },
   },
 
