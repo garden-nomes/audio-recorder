@@ -3,10 +3,9 @@
     :disabled="recording === null"
     class="play-button"
     type="button"
-    @mousedown="playAudio(recording)"
-    @mouseup="stopAudio"
+    @click="isPlaying ? stopAudio() : playAudio(recording)"
   >
-    {{ isPlaying ? "playing" : "play" }}
+    {{ isPlaying ? "stop" : "play" }}
   </button>
 </template>
 
