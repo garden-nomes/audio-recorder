@@ -1,0 +1,17 @@
+{
+  "name": "audio-recorder",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "run-s build:*",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install && npm run build",
+    "start": "run-p start:*",
+    "start:client": "cd client && npm run start",
+    "start:server": "cd server && npm run start",
+    "demo": "NODE_ENV=production ENABLE_CORS=true VUE_APP_SIMULATE_DELAY=true npm run start"
+  },
+  "author": "Naomi Weiner",
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
