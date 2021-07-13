@@ -7,7 +7,7 @@
     @mousedown="$emit('start')"
     @mouseup="$emit('stop')"
   >
-    record
+    hold to record
   </button>
 </template>
 
@@ -34,7 +34,7 @@ export default defineComponent({
 
 <style>
 .record-button {
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 1.5rem 3rem;
   width: 20rem;
   border-radius: 10rem;
