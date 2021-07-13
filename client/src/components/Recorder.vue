@@ -4,7 +4,7 @@
 
     <record-button
       :is-recording="isRecording"
-      :disabled="!isReadyToRecord || !!recordedAudio"
+      :disabled="!isRecordingEnabled"
       @start="startRecording"
       @stop="stopRecording"
     />
@@ -94,6 +94,12 @@ export default defineComponent({
       if (this.recordedAudio !== null) {
         this.uploadAudio(this.recordedAudio);
       }
+    },
+  },
+
+  computed: {
+    isRecordingEnabled(): boolean {
+      return this.stopTime === null && this.isReadyToRecord;
     },
   },
 });
