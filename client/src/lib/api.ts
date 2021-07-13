@@ -1,3 +1,9 @@
+// JSON structure of a POST response from the API
+export interface ApiPostResponse {
+  filename: string;
+  basename: string;
+}
+
 export default class Api {
   // either supply an API url in the constructor, or default to an environment variable
   // (for dev environments, see "client/.env.development")
@@ -8,7 +14,7 @@ export default class Api {
   }
 
   // posts a blob to the API with the approriate "Content-Type"
-  async postBlob(blob: Blob) {
+  async postBlob(blob: Blob): Promise<ApiPostResponse> {
     const response = await fetch(this.baseUrl, {
       method: "POST",
       headers: { "Content-Type": blob.type },
@@ -20,6 +26,6 @@ export default class Api {
     }
 
     // API returns the filename of the saved audio as raw text
-    return await response.text();
+    return await response.json();
   }
 }

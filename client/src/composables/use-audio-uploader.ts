@@ -1,7 +1,7 @@
 import Api from "@/lib/api";
 import { inject, ref } from "vue";
 
-// Vue composable that tracks the request state for the "postBlob" api call
+// Vue composable that tracks the request state and response for the "postBlob" api call
 export default function useAudioUploader() {
   // retrieve global API instance using provide/inject
   const api = inject("api") as Api;
@@ -12,6 +12,7 @@ export default function useAudioUploader() {
 
   // response from the last successful POST request
   const uploadFilename = ref(null as string | null);
+  const uploadPath = ref(null as string | null);
 
   // post an audio blob to the API
   const uploadAudio = async (audio: Blob) => {
@@ -20,7 +21,9 @@ export default function useAudioUploader() {
     uploadFilename.value = null;
 
     try {
-      uploadFilename.value = await api.postBlob(audio);
+      const { filename, basename } = await api.postBlob(audio);
+      uploadFilename.value = basename;
+      uploadPath.value = filename;
     } catch (err) {
       isUploadError.value = true;
     }
@@ -37,9 +40,10 @@ export default function useAudioUploader() {
 
   return {
     uploadAudio,
+    resetUploadStatus,
     isUploading,
     isUploadError,
     uploadFilename,
-    resetUploadStatus,
+    uploadPath,
   };
 }

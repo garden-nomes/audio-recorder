@@ -14,7 +14,10 @@
     </p>
     <p v-else-if="isUploading" class="status-text">Saving recording...</p>
     <p v-else-if="uploadFilename" class="status-text success">
-      Recording saved as {{ uploadFilename }}
+      Recording saved to
+      <span :title="uploadPath || ''" class="filename">
+        {{ uploadFilename }}
+      </span>
     </p>
     <p v-else class="status-text" aria-hidden="true">&nbsp;</p>
 
@@ -130,5 +133,10 @@ export default defineComponent({
   margin-bottom: 2rem !important;
   font-size: 0.75rem;
   color: #555;
+}
+
+.filename {
+  text-decoration: underline;
+  color: #333;
 }
 </style>
