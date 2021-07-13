@@ -6,6 +6,7 @@ export default class AudioStorage {
     constructor(private dir: string) {}
 
     async save(audioData: Buffer) {
+        // generate a unique filename using a human-readable id
         const filename = path.join(this.dir, `${hri.random()}.ogg`);
 
         await new Promise<void>((resolve, reject) => {
