@@ -1,5 +1,11 @@
 export default class Api {
-  constructor(private baseUrl: string) {}
+  // either supply an API url in the constructor, or default to an environment variable
+  // (for dev environments, see "client/.env.development")
+  constructor(private baseUrl: string = process.env.VUE_APP_API_BASE) {
+    if (!this.baseUrl) {
+      throw new Error("no baseUrl provided to the API");
+    }
+  }
 
   // posts a blob to the API with the approriate "Content-Type"
   async postBlob(blob: Blob) {
